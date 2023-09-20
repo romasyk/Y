@@ -8,17 +8,19 @@ import java.util.List;
 public class DefaultProfileService implements ProfileService{
     private final ProfileDao profileDao;
 
+
     @Override
-    public List<Profile> getProfiles(){
-        return profileDao.getProfiles();
+    public List<Profile> findAll() {
+        return profileDao.findAll();
     }
 
     @Override
-    public void addProfile(Profile profile){
-        profileDao.addProfile(profile);
+    public Profile findProfileByEmailAndPass(String emailP, String passwordP){
+        return  profileDao.findProfileByEmailAndPass(emailP,passwordP);
     }
 
     public DefaultProfileService(ProfileDao profileDao) {
         this.profileDao = profileDao;
     }
+
 }

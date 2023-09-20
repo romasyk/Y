@@ -2,7 +2,34 @@ package structure.domain;
 
 public class Profile {
    private String name;
+    private long id;
+    private String email;
+    private String password;
     private  String photo;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getName() {
         return name;
@@ -20,8 +47,22 @@ public class Profile {
         this.photo = photo;
     }
 
+    public Profile(String name,String photo, String email, String password, long id) {
+        this.name = name;
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.photo = photo;
+    }
+
     public Profile(String name, String photo) {
         this.name = name;
         this.photo = photo;
+    }
+
+    public Profile(long id, String email, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
     }
 }

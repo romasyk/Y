@@ -5,7 +5,9 @@ import structure.domain.Profile;
 import java.util.List;
 
 public interface ProfileService {
-    List<Profile> getProfiles();
 
-    void addProfile(Profile profile);
+
+    List<Profile> findAll();
+
+    Profile findProfileByEmailAndPass(String emailP, String passwordP);
 }
