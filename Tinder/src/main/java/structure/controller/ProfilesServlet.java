@@ -31,14 +31,14 @@ public class ProfilesServlet extends HttpServlet {
 
         Map<String, Object> params;
         if (count>= profiles.size()){
-            count = 0;
+            count = -1;
             resp.sendRedirect("/liked");
             return;
         }
 
         if (profiles.get(count).getId() == MainProfileId){count++;}
         if (count>= profiles.size()){
-            count = 0;
+            count = -1;
             resp.sendRedirect("/liked");
             return;
         }
@@ -56,7 +56,7 @@ public class ProfilesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         List<Profile> profiles = profileService.findAll();
         if (count>= profiles.size()){
-            count = 0;
+            count = -1;
             resp.sendRedirect("/liked");
             return;
         }
