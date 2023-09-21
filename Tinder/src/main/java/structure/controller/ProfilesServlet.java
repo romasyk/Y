@@ -14,7 +14,7 @@ import java.util.Map;
 import static structure.controller.LoginFilter.MainProfileId;
 
 public class ProfilesServlet extends HttpServlet {
-    public static int count =-1;
+    public static int count =0;
     private final ProfileService profileService;
     private final LikeService likeService;
     private final TemplateEngine templateEngine;
@@ -31,14 +31,14 @@ public class ProfilesServlet extends HttpServlet {
 
         Map<String, Object> params;
         if (count>= profiles.size()){
-            count = -1;
+            count = 0;
             resp.sendRedirect("/liked");
             return;
         }
 
         if (profiles.get(count).getId() == MainProfileId){count++;}
         if (count>= profiles.size()){
-            count = -1;
+            count = 0;
             resp.sendRedirect("/liked");
             return;
         }
@@ -56,7 +56,7 @@ public class ProfilesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         List<Profile> profiles = profileService.findAll();
         if (count>= profiles.size()){
-            count = -1;
+            count = 0;
             resp.sendRedirect("/liked");
             return;
         }
@@ -65,7 +65,6 @@ public class ProfilesServlet extends HttpServlet {
         }
         count++;
         doGet(req, resp);
-
     }
 }
 
