@@ -28,6 +28,7 @@ List<Profile> likedProfiles;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         likedProfiles = likeService.findLiked(MainProfileId);
+
         Map<String, Object> params = Map.of(
                 "liked", likedProfiles
         );
