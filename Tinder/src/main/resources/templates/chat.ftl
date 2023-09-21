@@ -116,14 +116,21 @@
             </div>
             <div class="message-text">
                 <p>Привіт, як справи?</p>
-                <span class="message-time">Ketty, 25 січня, 18:20</span>
             </div>
         </div>
     </div>
-    <textarea class="message-input" placeholder="Напишіть ваше повідомлення..."></textarea>
-    <button class="custom-button send-button">Відправити</button>
+    <form action="/message" method="POST">
+        <div class="row mt-3">
+            <div class="col-9 pr-0">
+                <input type="text" name="message" class="form-control" placeholder="Напишіть ваше повідомлення...">
+            </div>
+            <div class="col-3 pl-0">
+                <button class="btn btn-primary btn-block" type="submit">Відправити</button>
+            </div>
+        </div>
+    </form>
 
-    <!-- Кнопка для виходу методом POST -->
+
     <form method="GET" action="/logout">
         <button class="custom-button logout-button">Вийти</button>
     </form>

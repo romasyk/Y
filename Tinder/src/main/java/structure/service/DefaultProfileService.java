@@ -8,6 +8,10 @@ import java.util.List;
 public class DefaultProfileService implements ProfileService{
     private final ProfileDao profileDao;
 
+    @Override
+    public Profile findById(Long userId) {
+        return profileDao.findById(userId);
+    }
 
     @Override
     public List<Profile> findAll() {

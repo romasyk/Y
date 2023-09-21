@@ -31,6 +31,6 @@ List<Profile> likedProfiles;
         Map<String, Object> params = Map.of(
                 "liked", likedProfiles
         );
-        templateEngine.render("people-list.ftl", response);
+        templateEngine.render("people-list.ftl",params, response);
     }
 }

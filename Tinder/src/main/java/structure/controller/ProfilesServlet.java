@@ -1,5 +1,6 @@
 package structure.controller;
 
+import structure.domain.Profile;
 import structure.service.LikeService;
 import structure.service.ProfileService;
 
@@ -7,12 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import static structure.controller.LoginFilter.MainProfileId;
 
 public class ProfilesServlet extends HttpServlet {
-    public static int count =0;
+    public static int count =-1;
     private final ProfileService profileService;
     private final LikeService likeService;
     private final TemplateEngine templateEngine;
@@ -25,39 +27,45 @@ public class ProfilesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-      doPost(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        List<Profile> profiles = profileService.findAll();
 
         Map<String, Object> params;
-        if (count>= profileService.findAll().size()){
+        if (count>= profiles.size()){
             count = 0;
             resp.sendRedirect("/liked");
             return;
         }
 
-
-        if (profileService.findAll().get(count).getId() == MainProfileId){count++;}
-
-        if ( !(count>= profileService.findAll().size())) {
-            if (req.getParameter("liked")!=null && req.getParameter("liked").equals("YES")) {
-                likeService.addLike(MainProfileId, profileService.findAll().get(count).getId());
-            }
-        }
-        if (count>= profileService.findAll().size()){
+        if (profiles.get(count).getId() == MainProfileId){count++;}
+        if (count>= profiles.size()){
+            count = 0;
             resp.sendRedirect("/liked");
+            return;
         }
         if (count < profileService.findAll().size()) {
             params = Map.of(
-                    "name", profileService.findAll().get(count).getName(),
-                    "photo", profileService.findAll().get(count).getPhoto()
+                    "name", profiles.get(count).getName(),
+                    "photo", profiles.get(count).getPhoto()
 
             );
             templateEngine.render("like-page.ftl", params, resp);
-            count++;
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        List<Profile> profiles = profileService.findAll();
+        if (count>= profiles.size()){
+            count = 0;
+            resp.sendRedirect("/liked");
+            return;
+        }
+        if (req.getParameter("liked") != null && req.getParameter("liked").equals("YES")) {
+            likeService.addLike(MainProfileId, profiles.get(count).getId());
+        }
+        count++;
+        doGet(req, resp);
+
     }
 }
 

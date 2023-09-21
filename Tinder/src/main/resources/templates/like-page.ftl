@@ -48,7 +48,7 @@
                 <img src="${photo}" class="card-img-top mx-auto" alt="User Photo">
                 <div class="card-body">
                     <h3 class="mb-0">${name}</h3>
-                    <form action="/users" method="post">
+                    <form action="/users" method="POST">
                         <div class="row">
                             <div class="col-6">
                                 <button type="submit" name="liked" value ="NO" class="btn btn-dislike btn-block"><span class="fa fa-times"></span> Dislike</button>

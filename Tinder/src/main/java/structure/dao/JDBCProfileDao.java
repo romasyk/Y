@@ -57,4 +57,29 @@ public class JDBCProfileDao implements ProfileDao {
         }
         return null;
     }
+
+    @Override
+    public Profile findById(Long userId) {
+
+        try (Connection connection = getConnection()) {
+
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.users WHERE id=?");
+            statement.setLong(1, userId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                Long id = rs.getLong(1);
+                String name = rs.getString(2);
+                String photo = rs.getString(3);
+                String email = rs.getString(4);
+                String password = rs.getString(5);
+
+
+                return new Profile(   name, photo, email,  password,id);
+            }
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

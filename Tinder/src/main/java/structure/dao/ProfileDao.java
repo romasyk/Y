@@ -19,4 +19,6 @@ public interface ProfileDao {
     List<Profile> findAll();
 
     Profile findProfileByEmailAndPass(String emailP, String passwordP);
+
+    Profile findById(Long userId);
 }
