@@ -46,7 +46,7 @@ public class JDBCChatDao implements ChatDao{
     public List<Message> findMessageById(Long senderId, Long receiverId) {
         List <Message> messages = new ArrayList<>();
         try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.messages WHERE (sender=? AND receiver=?) OR ( sender=? AND receiver=?)");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.messages WHERE (sender_id=? AND receiver_id=?) OR ( sender_id=? AND receiver_id=?)");
             statement.setLong(1, senderId);
             statement.setLong(2, receiverId);
             statement.setLong(3, receiverId);

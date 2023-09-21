@@ -45,7 +45,7 @@ public class ChatServlet extends HttpServlet {
                 "names", List.of(mainUser.getName(), mainUser.getPhoto(),
                         currantUser.getName(), currantUser.getPhoto()),
                 "default", List.of(defaultMessage));
-        templateEngine.render("chat.ftl", resp);
+        templateEngine.render("chat.ftl",params, resp);
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
