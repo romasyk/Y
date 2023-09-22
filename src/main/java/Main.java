@@ -11,7 +11,7 @@ import java.util.EnumSet;
 
 public class Main {
     public static void main(String[] args) throws Exception{
-        Server server = new Server(8081);
+        Server server = new Server(Integer.parseInt(System.getenv("PORT") == null?"8081":System.getenv("PORT")));
 
         TemplateEngine templateEngine = new TemplateEngine();
 
@@ -39,9 +39,9 @@ public class Main {
         handler.addServlet(new ServletHolder(logOutServlet), "/logout");
 
 
-        handler.addFilter(new FilterHolder(new LoginFilter(templateEngine,profileService)), "/message", EnumSet.of(DispatcherType.REQUEST));
-        handler.addFilter(new FilterHolder(new LoginFilter(templateEngine,profileService)), "/liked", EnumSet.of(DispatcherType.REQUEST));
-        handler.addFilter(new FilterHolder(new LoginFilter(templateEngine,profileService)), "/users", EnumSet.of(DispatcherType.REQUEST));
+        handler.addFilter(new FilterHolder(new LoginFilter(templateEngine,profileService)), "/message", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
+        handler.addFilter(new FilterHolder(new LoginFilter(templateEngine,profileService)), "/liked", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
+        handler.addFilter(new FilterHolder(new LoginFilter(templateEngine,profileService)), "/users", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
 
         handler.addServlet(CSSBootstrapServlet.class, "/css/bootstrap.min.css");
         handler.addServlet(JsBootstrapServlet.class, "/js/bootstrap.min.css");
