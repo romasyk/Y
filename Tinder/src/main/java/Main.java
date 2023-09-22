@@ -43,7 +43,6 @@ public class Main {
         handler.addFilter(new FilterHolder(new LoginFilter(templateEngine,profileService)), "/liked", EnumSet.of(DispatcherType.REQUEST));
         handler.addFilter(new FilterHolder(new LoginFilter(templateEngine,profileService)), "/users", EnumSet.of(DispatcherType.REQUEST));
 
-
         handler.addServlet(CSSBootstrapServlet.class, "/css/bootstrap.min.css");
         handler.addServlet(JsBootstrapServlet.class, "/js/bootstrap.min.css");
         handler.addServlet(CSSStyleServlet.class, "/css/style.css");
