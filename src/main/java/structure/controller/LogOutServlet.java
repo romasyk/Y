@@ -29,7 +29,6 @@ public class LogOutServlet extends HttpServlet {
         CookieUtil.findCookieByName(request, PROFILE_COOKIE_NAME)
                 .ifPresent(c -> {
                     c.setMaxAge(0);
-                    c.setPath("/");
                     response.addCookie(c);
                 });
         likeService.deleteAllLikes(MainProfileId);
