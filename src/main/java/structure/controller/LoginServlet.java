@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        if(CookieUtil.findCookieByName(request, PROFILE_COOKIE_NAME).isPresent() && request.getServletPath().equals("/")){
+        if(CookieUtil.findCookieByName(request, PROFILE_COOKIE_NAME).isPresent()){
             response.sendRedirect("/users");
         }
         templateEngine.render("login.ftl", response);
