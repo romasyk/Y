@@ -1,1 +1,0 @@
-web: java -Dserver.port=$PORT -jar target/Tinder-1.0-SNAPSHOT.jar

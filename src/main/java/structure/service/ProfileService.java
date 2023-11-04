@@ -7,6 +7,8 @@ import java.util.List;
 public interface ProfileService {
 
 
+    void update(Long id);
+
     Profile findById(Long userId);
 
     List<Profile> findAll();

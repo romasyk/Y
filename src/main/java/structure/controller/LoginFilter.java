@@ -41,6 +41,7 @@ public class LoginFilter implements Filter {
             Profile profile = profileService.findProfileByEmailAndPass(email, password);
             if (profile != null) {
                 MainProfileId = profile.getId();
+                profileService.update(MainProfileId);
                 response.addCookie(new Cookie(PROFILE_COOKIE_NAME, String.valueOf(profile.getId())));
                 filterChain.doFilter(request, response);
             }

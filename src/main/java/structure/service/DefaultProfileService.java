@@ -8,6 +8,13 @@ import java.util.List;
 public class DefaultProfileService implements ProfileService{
     private final ProfileDao profileDao;
 
+
+    @Override
+    public void update(Long id){
+        profileDao.update(id);
+    }
+
+
     @Override
     public Profile findById(Long userId) {
         return profileDao.findById(userId);

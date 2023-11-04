@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class JDBCProfileDao implements ProfileDao {
     public List<Profile> findAll() {
         List <Profile> users = new ArrayList<>();
         try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.users ");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.user ");
 
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -29,7 +31,9 @@ public class JDBCProfileDao implements ProfileDao {
                 String photo = rs.getString(3);
                 String email = rs.getString(4);
                 String password = rs.getString(5);
-                users.add( new Profile(name,photo ,email,password, id));
+                String info = rs.getString(6);
+                String lastlogining = rs.getString(7);
+                users.add( new Profile(name,id,email,password,photo,info,lastlogining));
 
             }
         } catch (SQLException e) {
@@ -41,7 +45,7 @@ public class JDBCProfileDao implements ProfileDao {
     @Override
     public Profile findProfileByEmailAndPass(String emailP, String passwordP) {
         try (Connection connection = getConnection()){
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.users WHERE  email=? AND password=?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.user WHERE  login=? AND password=?");
             statement.setString(1, emailP);
             statement.setString(2, passwordP);
             ResultSet rs = statement.executeQuery();
@@ -58,12 +62,25 @@ public class JDBCProfileDao implements ProfileDao {
         return null;
     }
 
+
+
+    @Override
+    public void update(Long  id) {
+        LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/YYYY"));
+        try (Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("UPDATE public.user SET lastlogining=? WHERE id=?");
+            statement.setString(1, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/YYYY")));
+            statement.setLong(2, id);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();}
+    }
     @Override
     public Profile findById(Long userId) {
 
         try (Connection connection = getConnection()) {
 
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.users WHERE id=?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.user WHERE id=?");
             statement.setLong(1, userId);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
@@ -72,9 +89,11 @@ public class JDBCProfileDao implements ProfileDao {
                 String photo = rs.getString(3);
                 String email = rs.getString(4);
                 String password = rs.getString(5);
+                String info = rs.getString(6);
+                String lastlogining = rs.getString(7);
 
 
-                return new Profile(   name, photo, email,  password,id);
+                return new Profile(name,id,email,password,photo,info,lastlogining);
             }
         } catch (SQLException e) {
 

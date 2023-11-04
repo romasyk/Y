@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Описание вашей страницы здесь. Это описание может содержать информацию о вашем веб-приложении или сайте.">
     <meta name="author" content="">
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Emblem-favorites.svg/200px-Emblem-favorites.svg.png">
+    <link rel="icon" href="https://banner2.cleanpng.com/20180408/ice/kisspng-y-alphabet-letter-ue-a-letter-5ac9cc25a7b551.223091351523174437687.jpg">
     <title>Like page</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!-- Bootstrap core CSS -->

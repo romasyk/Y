@@ -14,7 +14,7 @@ public class JDBCLikeDao implements LikeDao{
     public void addLike(long userId, long likedId) {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO public.likes (user_id,liked_id) VALUES(?,?)");
+                    "INSERT INTO public.like (user_id,like_id) VALUES(?,?)");
 
             statement.setLong(1, userId);
             statement.setLong(2, likedId);
@@ -28,7 +28,7 @@ public class JDBCLikeDao implements LikeDao{
     @Override
     public void deleteAllLikes(long userId) {
         try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM public.likes WHERE user_id=?");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM public.like WHERE user_id=?");
             statement.setLong(1,userId);
             statement.execute();
         } catch (SQLException e) {
@@ -41,7 +41,7 @@ public class JDBCLikeDao implements LikeDao{
         List <Profile> users = new ArrayList<>();
 
         try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT u.* FROM users u INNER JOIN likes l ON u.id = l.liked_id WHERE l.user_id = ?;");
+            PreparedStatement statement = connection.prepareStatement("SELECT u.* FROM public.user u INNER JOIN public.like l ON u.id = l.like_id WHERE l.user_id = ?;");
             statement.setLong(1,userId);
 
             ResultSet rs = statement.executeQuery();
@@ -52,7 +52,10 @@ public class JDBCLikeDao implements LikeDao{
                 String photo = rs.getString(3);
                 String email = rs.getString(4);
                 String password = rs.getString(5);
-                users.add( new Profile(name,photo ,email,password, id));
+                String info = rs.getString(6);
+                String lastlogining = rs.getString(7);
+
+                users.add(new Profile(name,id,email,password,photo,info,lastlogining));
             }
         } catch (SQLException e) {
             e.printStackTrace();

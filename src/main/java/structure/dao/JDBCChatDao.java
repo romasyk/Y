@@ -16,7 +16,7 @@ public class JDBCChatDao implements ChatDao{
 
         List <Message> messages = new ArrayList<>();
         try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.messages ");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.message ");
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Long sender = rs.getLong(2);
@@ -33,7 +33,7 @@ public class JDBCChatDao implements ChatDao{
         System.out.println("dao try to add message ");
         try (Connection connection = getConnection()) {
             System.out.println("connection for adding");
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO public.messages (sender_id,receiver_id, content) VALUES(?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO public.message (sender,receiver, content) VALUES(?,?,?)");
             statement.setLong(1, senderId);
             statement.setLong(2, receiverId);
             statement.setString(3, text);
@@ -46,7 +46,7 @@ public class JDBCChatDao implements ChatDao{
     public List<Message> findMessageById(Long senderId, Long receiverId) {
         List <Message> messages = new ArrayList<>();
         try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.messages WHERE (sender_id=? AND receiver_id=?) OR ( sender_id=? AND receiver_id=?)");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM public.message WHERE (sender=? AND receiver=?) OR ( sender=? AND receiver=?)");
             statement.setLong(1, senderId);
             statement.setLong(2, receiverId);
             statement.setLong(3, receiverId);

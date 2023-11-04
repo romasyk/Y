@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Emblem-favorites.svg/200px-Emblem-favorites.svg.png">
+    <link rel="icon" href="https://banner2.cleanpng.com/20180408/ice/kisspng-y-alphabet-letter-ue-a-letter-5ac9cc25a7b551.223091351523174437687.jpg">
     <title>Chat</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/bootstrap.min.css" >
@@ -28,19 +28,6 @@
 
 
                     </div>
-                </div>
-                <div class="row header-two w-100">
-                    <div class="col-md-6 options-left pl-1">
-                        <i class="fa fa-video-camera mr-3"></i>
-                        <i class="fa fa-video-camera mr-3"></i>
-                    </div>
-
-                    <div class="col-md-6 options-right text-right pr-2">
-                        <button title="LogOut" onclick="window.location.href='/logout'; return false" style="border: none; background-color: transparent;">
-                            <i class="fa fa-cog"></i>
-                        </button>
-                    </div>
-
                 </div>
             </div>
             <div class="chat-content">
@@ -90,6 +77,13 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <form method="GET" action="/logout">
+                        <button type="submit" class="btn btn-logout">Вийти</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

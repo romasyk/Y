@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ChatDao {
     default Connection getConnection()throws SQLException {
-        return DriverManager.getConnection("jdbc:postgresql://cornelius.db.elephantsql.com:5432/yxrukzxz", "yxrukzxz", "URBeCzTZG4De1BjDww0KRThi-NMi8cqT");
+        return DriverManager.getConnection("jdbc:postgresql://cornelius.db.elephantsql.com:5432/rxrpffrt", "rxrpffrt", "Nkna4UM4gZJ0OYYS9Ap2ya_wyNsgHqsc");
     }
 
     List<Message> findAll();
