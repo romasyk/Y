@@ -27,15 +27,31 @@ public class ProfilesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<Profile> profiles = profileService.findAll();
+  doPost(req,resp);
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        List<Profile> profiles = profileService.findAll();
         Map<String, Object> params;
+
+
         if (count>= profiles.size()){
             count = 0;
             resp.sendRedirect("/liked");
             return;
         }
 
+        if (req.getParameter("liked") != null && req.getParameter("liked").equals("YES")) {
+
+            likeService.addLike(MainProfileId, profiles.get(count).getId());
+            count++;
+        }
+        if (count>= profiles.size()){
+            count = 0;
+            resp.sendRedirect("/liked");
+            return;
+        }
         if (profiles.get(count).getId() == MainProfileId){count++;}
         if (count>= profiles.size()){
             count = 0;
@@ -50,21 +66,8 @@ public class ProfilesServlet extends HttpServlet {
             );
             templateEngine.render("like-page.ftl", params, resp);
         }
-    }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<Profile> profiles = profileService.findAll();
-        if (count>= profiles.size()){
-            count = 0;
-            resp.sendRedirect("/liked");
-            return;
-        }
-        if (req.getParameter("liked") != null && req.getParameter("liked").equals("YES")) {
-            likeService.addLike(MainProfileId, profiles.get(count).getId());
-        }
-        count++;
-        doGet(req, resp);
+
     }
 }
 
