@@ -10,11 +10,13 @@ import java.util.List;
 public interface ProfileDao {
 
 
-
+    public void save(String name, String email,  String password, String photo, String info);
 
     default Connection getConnection()throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://cornelius.db.elephantsql.com:5432/rxrpffrt", "rxrpffrt", "Nkna4UM4gZJ0OYYS9Ap2ya_wyNsgHqsc");
     }
+
+    List<String> findAllEmails();
 
     List<Profile> findAll();
 

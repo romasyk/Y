@@ -73,6 +73,7 @@
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password"  name="password" id="inputPassword" class="form-control" placeholder="Password" required>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <a href="/signup" class="btn btn-lg btn-success btn-block">Sign Up</a> <!-- Add this line for the "Sign Up" button -->
     <p class="mt-5 mb-3 text-muted">&copy; Y</p>
 </form>
 </body>

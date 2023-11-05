@@ -81,7 +81,7 @@
             <div class="row justify-content-center">
                 <div class="col-auto">
                     <form method="GET" action="/logout">
-                        <button type="submit" class="btn btn-logout">Вийти</button>
+                        <button type="submit" class="btn btn-logout">EXIT</button>
                     </form>
                 </div>
             </div>

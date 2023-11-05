@@ -13,9 +13,44 @@ import java.util.List;
 
 public class JDBCProfileDao implements ProfileDao {
 
+    @Override
+    public void save(String name, String email,  String password, String photo, String info) {
+        try (Connection connection = getConnection()) {
+
+            String insertQuery = "INSERT INTO public.user (name, login, password, photo, info, lastlogining) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(insertQuery);
+            statement.setString(1, name);
+            statement.setString(2, email);
+            statement.setString(3, password);
+            statement.setString(4, photo);
+            statement.setString(5, info);
+            statement.setString(6, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/YYYY")));
+
+            statement.executeUpdate();
+
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
+    @Override
+    public List<String> findAllEmails() {
+        List <String> emails = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT login FROM public.user ");
 
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                String email = rs.getString(1);
+                emails.add( email);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return emails;
+    }
 
 
     @Override

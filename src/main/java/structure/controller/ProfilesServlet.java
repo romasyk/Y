@@ -41,9 +41,10 @@ public class ProfilesServlet extends HttpServlet {
             resp.sendRedirect("/liked");
             return;
         }
-
+        if (req.getParameter("liked") != null && req.getParameter("liked").equals("NO")) {
+            count++;
+        }
         if (req.getParameter("liked") != null && req.getParameter("liked").equals("YES")) {
-
             likeService.addLike(MainProfileId, profiles.get(count).getId());
             count++;
         }
